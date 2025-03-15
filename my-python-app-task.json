@@ -1,0 +1,30 @@
+{
+  "family": "my-python-app-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::216989096072:role/my-project-ecs-execution-role",
+  "containerDefinitions": [
+    {
+      "name": "my-python-app",
+      "image": "216989096072.dkr.ecr.us-east-1.amazonaws.com/my-python-app:latest",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-python-app",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "my-python-app"
+        }
+      }
+    }
+  ]
+}
